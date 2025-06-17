@@ -7,30 +7,49 @@ const Transaction = {
   WITHDRAW: 'withdraw',
 };
 
+const DEPOSIT = {
+  id:67234,                
+  type: 'deposit',    
+  amount: 100         
+};
+console.log(id, type, amount)
+
+const WITHDRAW = {
+  id:13313,                
+  type: 'withdraw',    
+  amount: 500         
+};
+
 /*
  * Кожна транзакція - це об'єкт з властивостями: id, type і amount
  */
 const account = {
   // Поточний баланс рахунку
   balance: 0,
+};
+
+const {balance='1000' } = account
+console.log(balance)
 
   // Історія транзакцій
+
+const transactionHistory = [deposit, withdraw];
+
+const history = {
   transactions: [],
-
-  transactionType: 0,
-
+};
+console.log(transaction)
   /*
    * Метод створює і повертає об'єкт транзакції.
    * Приймає суму і тип транзакції.
    */
-  createTransaction(amount, type) {
-    return {
-      id: ++this.transactionType,
-      amount,
-      type,
-    };
-  },
 
+  createTransaction(amount, type) {
+    return{
+      ammont,
+      type
+    }
+  }
   /*
    * Метод відповідає за додавання суми до балансу.
    * Приймає суму танзакції.
@@ -38,13 +57,10 @@ const account = {
    * після чого додає його в історію транзакцій
    */
   deposit(amount) {
-    this.balance += amount;
-
-    const { id, type, amount: value } = this.createTransaction(amount, Transaction.DEPOSIT);
-
-    this.transactions = [...this.transactions, { id, type, amount: value }];
-  },
-
+    balance +=amount;
+    const transaction = createTransaction( amount, type)
+}
+console.log(deposit, balance)
   /*
    * Метод відповідає за зняття суми з балансу.
    * Приймає суму танзакції.
@@ -54,61 +70,32 @@ const account = {
    * Якщо amount більше, ніж поточний баланс, виводь повідомлення
    * про те, що зняття такої суми не можливо, недостатньо коштів.
    */
-  withdraw(amount) {
-    const { balance } = this;
-
-    if (amount > balance) {
-      console.log('недостатньо коштів');
-      return;
-    }
-
-    this.balance -= amount;
-
-    const { id, type, amount: value } = this.createTransaction(amount, Transaction.WITHDRAW);
-
-    this.transactions = [...this.transactions, { id, type, amount: value }];
-  },
-
+withdraw(amount) {
+  if (amount > balance) {
+    console.log('Зняття такої суми неможливе, недостатньо коштів.');
+    return; 
+  }
+}
   /*
    * Метод повертає поточний баланс
    */
-  getBalance() {
-    const { balance } = this;
-    return balance;
-  },
+   function getBalance(account) {
+    return account.balance
 
+  }
   /*
    * Метод шукає і повертає об'єкт транзакції по id
    */
-  getTransactionDetails(id) {
-    for (const transaction of this.transactions) {
-      const { id: currentId, type, amount } = transaction;
-      if (currentId === id) {
-        return { id: currentId, type, amount };
-      }
-    }
-    return null;
-  },
+   function getTransactionDetails(id) {
+      return account.transactions.find(transaction => transaction.id === id);
+
+   },
 
   /*
+
    * Метод повертає кількість коштів
    * певного типу транзакції з усієї історії транзакцій
    */
-  getTransactionTotal(type) {
-    let total = 0;
-
-    for (const transaction of this.transactions) {
-      const { type: currentType, amount } = transaction;
-      if (currentType === type) {
-        total += amount;
-      }
-    }
-
-    return total;
+  function getTransactionTotal(type) {
+    return account.balance
   },
-
-  getFirstTwoTransactions() {
-    const [first, second] = this.transactions;
-    return { first, second };
-  },
-};
