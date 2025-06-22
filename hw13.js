@@ -99,3 +99,19 @@ withdraw(amount) {
   function getTransactionTotal(type) {
     return account.balance
   },
+
+
+  // hw12 dest.
+
+  function countTotalSalary(salaries) {
+  let total = 0;
+  for (const salary of Object.values(salaries)) {
+    total += salary;
+  }
+  return total;
+}
+console.log(countTotalSalary({
+  Mark: 142,
+  Sam: 293,
+  Frye: 31,
+}));
